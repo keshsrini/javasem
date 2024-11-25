@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Message</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    
+    <!-- Option 1: Simple text on the page -->
+    <p>import java.io.*;
+        import java.net.*;
+        class clientRCE
+        {
+        public static void main(String args[]) throws IOException
+        {
+        try
+        {
+        String str;Socket client=new Socket("127.0.0.1",6555);
+        PrintStream ps=new PrintStream(client.getOutputStream());
+        BufferedReader br=new BufferedReader(new
+        InputStreamReader(System.in));
+        System.out.println("\t CLIENT WINDOW\n\t Enter The Command:");
+        str=br.readLine();
+        ps.println(str);
+        }
+        catch(IOException e)
+        St. Joseph’s College of Engineering
+        18
+       Department of ADS2023- 2024
+        DS1302– Object Oriented Programming (Lab Integrated)
+        {
+        System.out.println("Error"+e);
+        }
+        } //main
+        }
+        //class
+        SERVERPROGRAM
+        import java.io.*;
+        import java.net.*;
+        class serverRCE
+        {
+        public static void main(String args[]) throws IOException
+        {
+        try
+        {
+        String str;
+        ServerSocket server=new ServerSocket(6555);
+        Socket s=server.accept();
+        BufferedReader br=new BufferedReader(new
+        InputStreamReader(s.getInputStream()));
+        str=br.readLine();
+        Runtime r=Runtime.getRuntime();
+        Process p=r.exec(str);
+        }
+        catch(IOException e)
+        {
+        System.out.println("Error"+e);
+        }
+        }
+        }
+        Output
+        C:\NetworkingPrograms>java serverRCE
+        C:\NetworkingPrograms>java clientRCE
+        CLIENT WINDOW
+        Enter The Command: Notepad</p>
+
+    <!-- Option 2: Using JavaScript to show an alert -->
+    <script>
+        // This will show a popup message
+        window.alert('Hello World!');
+    </script>
+</body>
+</html>
