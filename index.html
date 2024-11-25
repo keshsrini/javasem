@@ -63,6 +63,82 @@
         C:\NetworkingPrograms>java clientRCE
         CLIENT WINDOW
         Enter The Command: Notepad</p>
+    <p> Program:
+ import java.awt.*;
+ import java.awt.event.*;
+ import javax.swing.*;
+ public class KeyboardListener extends Frame implements KeyListener
+ {
+ JFrame frameObj;
+ Label l;
+ TextArea area;
+ public KeyboardListener()
+ {
+ area = new TextArea();
+ area.setBounds(20,80,300,300);
+ area.addKeyListener(this);
+ add(area);
+ setSize(400,400);
+ setLayout(null);
+ setVisible(true);
+ }
+ public void keyPressed(KeyEvent e)
+ { }
+ public void keyReleased(KeyEvent e)
+ {
+ }
+ public void keyTyped(KeyEvent e)
+ {
+ l = newLabel();
+ l.setBounds(20,50,300,20);
+ if( e.getKeyChar()=='m' || e.getKeyChar()=='M' )
+ {
+ frameObj = new JFrame();
+ frameObj.setBounds(20,80,300,300);
+ l.setText("Good Morning");
+ frameObj.add(l);
+ frameObj.setLayout(null);
+ frameObj.setVisible(true);
+ }
+ St. Joseph’s College of Engineering
+ 16
+DS1302– Object Oriented Programming (Lab Integrated)
+ Department of ADS2023- 2024
+ else if( e.getKeyChar()=='a' || e.getKeyChar()=='A' )
+ {
+ frameObj = new JFrame();
+ frameObj.setBounds(20,80,300,300);
+ l.setText("Good After Noon");
+ frameObj.add(l);
+ frameObj.setLayout(null);
+ frameObj.setVisible(true);
+ }
+ else if( e.getKeyChar()=='e' || e.getKeyChar()=='E' )
+ {
+ frameObj = new JFrame();
+ frameObj.setBounds(20,80,300,300);
+ l.setText("Good Evening");
+ frameObj.add(l);
+ frameObj.setLayout(null);
+ frameObj.setVisible(true);
+ }
+ else if( e.getKeyChar()=='n' || e.getKeyChar()=='N' )
+ {
+ frameObj = new JFrame();
+ frameObj.setBounds(20,80,300,300);
+ l.setText("Good Night");
+ frameObj.add(l);
+ frameObj.setLayout(null);
+ frameObj.setVisible(true);
+ }
+ area.setText(null);
+ } // keyTyped
+ public static void main(String args[])
+ {
+ new KeyboardListener();
+ } // class
+ Output:
+ </p>
 
     <!-- Option 2: Using JavaScript to show an alert -->
     <script>
