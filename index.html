@@ -7,138 +7,276 @@
     <h1>Hello World!</h1>
     
     <!-- Option 1: Simple text on the page -->
-    <p>import java.io.*;
-        import java.net.*;
-        class clientRCE
-        {
-        public static void main(String args[]) throws IOException
-        {
-        try
-        {
-        String str;Socket client=new Socket("127.0.0.1",6555);
-        PrintStream ps=new PrintStream(client.getOutputStream());
-        BufferedReader br=new BufferedReader(new
-        InputStreamReader(System.in));
-        System.out.println("\t CLIENT WINDOW\n\t Enter The Command:");
-        str=br.readLine();
-        ps.println(str);
-        }
-        catch(IOException e)
-        St. Joseph’s College of Engineering
-        18
-       Department of ADS2023- 2024
-        DS1302– Object Oriented Programming (Lab Integrated)
-        {
-        System.out.println("Error"+e);
-        }
-        } //main
-        }
-        //class
-        SERVERPROGRAM
-        import java.io.*;
-        import java.net.*;
-        class serverRCE
-        {
-        public static void main(String args[]) throws IOException
-        {
-        try
-        {
-        String str;
-        ServerSocket server=new ServerSocket(6555);
-        Socket s=server.accept();
-        BufferedReader br=new BufferedReader(new
-        InputStreamReader(s.getInputStream()));
-        str=br.readLine();
-        Runtime r=Runtime.getRuntime();
-        Process p=r.exec(str);
-        }
-        catch(IOException e)
-        {
-        System.out.println("Error"+e);
-        }
-        }
-        }
-        Output
-        C:\NetworkingPrograms>java serverRCE
-        C:\NetworkingPrograms>java clientRCE
-        CLIENT WINDOW
-        Enter The Command: Notepad</p>
-    <p> Program:
- import java.awt.*;
- import java.awt.event.*;
- import javax.swing.*;
- public class KeyboardListener extends Frame implements KeyListener
- {
- JFrame frameObj;
- Label l;
- TextArea area;
- public KeyboardListener()
- {
- area = new TextArea();
- area.setBounds(20,80,300,300);
- area.addKeyListener(this);
- add(area);
- setSize(400,400);
- setLayout(null);
- setVisible(true);
- }
- public void keyPressed(KeyEvent e)
- { }
- public void keyReleased(KeyEvent e)
- {
- }
- public void keyTyped(KeyEvent e)
- {
- l = newLabel();
- l.setBounds(20,50,300,20);
- if( e.getKeyChar()=='m' || e.getKeyChar()=='M' )
- {
- frameObj = new JFrame();
- frameObj.setBounds(20,80,300,300);
- l.setText("Good Morning");
- frameObj.add(l);
- frameObj.setLayout(null);
- frameObj.setVisible(true);
- }
- St. Joseph’s College of Engineering
- 16
-DS1302– Object Oriented Programming (Lab Integrated)
- Department of ADS2023- 2024
- else if( e.getKeyChar()=='a' || e.getKeyChar()=='A' )
- {
- frameObj = new JFrame();
- frameObj.setBounds(20,80,300,300);
- l.setText("Good After Noon");
- frameObj.add(l);
- frameObj.setLayout(null);
- frameObj.setVisible(true);
- }
- else if( e.getKeyChar()=='e' || e.getKeyChar()=='E' )
- {
- frameObj = new JFrame();
- frameObj.setBounds(20,80,300,300);
- l.setText("Good Evening");
- frameObj.add(l);
- frameObj.setLayout(null);
- frameObj.setVisible(true);
- }
- else if( e.getKeyChar()=='n' || e.getKeyChar()=='N' )
- {
- frameObj = new JFrame();
- frameObj.setBounds(20,80,300,300);
- l.setText("Good Night");
- frameObj.add(l);
- frameObj.setLayout(null);
- frameObj.setVisible(true);
- }
- area.setText(null);
- } // keyTyped
- public static void main(String args[])
- {
- new KeyboardListener();
- } // class
- Output:
- </p>
+    <p>8Puzzle.......from collections import deque 
+ 
+class Solution: 
+    def solve(self, board): 
+        start = tuple(sum(board, [])) 
+        goal = (0, 1, 2, 3, 4, 5, 6, 7, 8) 
+ 
+        if start == goal: 
+            return 0 
+ 
+        queue = deque([(start, 0)]) 
+        visited = set([start]) 
+ 
+        while queue: 
+            state, depth = queue.popleft() 
+            blank_index = state.index(0) 
+ 
+            for i, j in [(blank_index, blank_index + 1), 
+(blank_index, blank_index - 1), 
+                         (blank_index, blank_index + 3), 
+(blank_index, blank_index - 3)]: 
+                if 0 <= i < 9 and 0 <= j < 9: 
+                    new_state = list(state) 
+                    new_state[i], new_state[j] = new_state[j], 
+new_state[i] 
+                    new_state = tuple(new_state) 
+ 
+                    if new_state == goal: 
+                        return depth + 1 
+ 
+                    if new_state not in visited: 
+                        visited.add(new_state) 
+                        queue.append((new_state, depth + 1)) 
+ 
+        return -1 
+ 
+ob = Solution() 
+matrix = [[3, 1, 2], [4, 7, 5], [6, 8, 0]] 
+print(ob.solve(matrix)) </p>
+    <p>def water_jug_dfs(c1, c2, target): 
+    visited, path = set(), [] 
+ 
+    def dfs(j1, j2): 
+        if (j1, j2) in visited or j1 > c1 or j2 > c2: 
+            return False 
+        visited.add((j1, j2)) 
+        path.append((j1, j2)) 
+        if (j1, j2) == (0, target): 
+            return True 
+        if dfs(c1, j2): 
+            return True 
+        if dfs(j1, c2):  
+            return True 
+        if dfs(0, j2):  
+            return True 
+        if dfs(j1, 0):  
+            return True 
+        if dfs(max(0, j1 - (c2 - j2)), min(c2, j1 + j2)): 
+            return True 
+        if dfs(min(c1, j1 + j2), max(0, j2 - (c1 - j1))): 
+            return True 
+        return False 
+ 
+    dfs(0, 0) 
+    return path 
+ 
+capacity1, capacity2, target = 4, 3, 2 
+solution = water_jug_dfs(capacity1, capacity2, target) 
+for step in solution: 
+    print(step) </p>
+    <p>def is_valid(board, r, c, n): 
+    return all(board[r][i] != n for i in range(4)) and \ 
+           all(board[i][c] != n for i in range(4)) and \ 
+           all(board[r//2*2+i//2][c//2*2+i%2] != n for i in 
+range(4)) 
+ 
+def solve(board): 
+    for r in range(4): 
+        for c in range(4): 
+            if board[r][c] == 0: 
+                for n in range(1, 5): 
+                    if is_valid(board, r, c, n): 
+                        board[r][c] = n 
+                        if solve(board):  
+                               return True 
+                        board[r][c] = 0 
+                return False 
+    return True 
+ 
+def print_board(board): 
+    for row in board:  
+             print(" ".join(map(str, row))) 
+ 
+board = [ 
+    [1, 0, 0, 0], 
+    [0, 0, 3, 0], 
+    [0, 2, 0, 0], 
+    [0, 0, 0, 4] 
+] 
+ 
+if solve(board): 
+         print_board(board) 
+else:  
+         print("No solution")</p>
+    <p>.GRAPH COLOURING ALGORITHM: 
+ 
+def graph_coloring(graph): 
+    colors = [-1] * len(graph)   
+    colors[0] = 0  
+ 
+    for node in range(1, len(graph)): 
+        available_colors = [True] * len(graph) 
+         
+        for neighbor in graph[node]: 
+            if colors[neighbor] != -1: 
+                available_colors[colors[neighbor]] = False 
+         
+        for color in range(len(graph)): 
+            if available_colors[color]: 
+                colors[node] = color 
+                break 
+     
+    return [color + 1 for color in colors] 
+ 
+graph = [ 
+    [1, 2],     
+    [0, 2],    
+    [0, 1],     
+    []          
+] 
+ 
+colors = graph_coloring(graph) 
+print(" ".join(map(str, colors)))</p>
+    <p>def job_scheduling(jobs, m): 
+    jobs.sort(reverse=True) 
+    machines = [0] * m 
+    assignment = [] 
+ 
+    for job in jobs: 
+        min_machine = min(range(m), key=lambda x: 
+machines[x]) 
+        machines[min_machine] += job 
+        assignment.append(min_machine + 1) 
+ 
+    return assignment, machines 
+ 
+jobs = [10, 20, 30, 40, 50, 60] 
+machines = 3 
+assignment, times = job_scheduling(jobs, machines) 
+ 
+for i, job in enumerate(jobs): 
+    print(f"Job {i+1} (Duration: {job}) is assigned to 
+Machine {assignment[i]}") 
+     
+print("\nTotal time (Makespan) on each machine:", 
+times) </p>
+    <p>Travel...........
+    import itertools 
+ 
+def tsp(dist): 
+    min_dist = float('inf') 
+    best_path = [] 
+ 
+    for path in itertools.permutations(range(1, 
+len(dist))): 
+        full_path = [0] + list(path) + [0] 
+        dist_sum = sum(dist[full_path[i]][full_path[i+1]] 
+for i in range(len(full_path)-1)) 
+         
+        if dist_sum < min_dist: 
+            min_dist = dist_sum 
+            best_path = full_path 
+ 
+    return best_path, min_dist 
+ 
+dist = [[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], 
+[20, 25, 30, 0]] 
+best_path, min_dist = tsp(dist) 
+print((best_path, min_dist))</p>
+    <p>A* ALGORITHM: 
+ 
+from heapq import heappop, heappush 
+ 
+graph = {'A': [('B', 1), ('C', 4)], 'B': [('A', 1), ('D', 2), ('E', 
+5)], 
+         'C': [('A', 4), ('E', 3)], 'D': [('B', 2), ('DG', 1)], 
+         'E': [('B', 5), ('C', 3), ('DG', 6)], 'DG': [('D', 1), ('E', 
+6)]} 
+heuristic = {'A': 6, 'B': 5, 'C': 4, 'D': 2, 'E': 3, 'DG': 0} 
+ 
+def a_star(start, goal='DG'): 
+    pq, visited = [(heuristic[start], 0, start, [])], set() 
+    while pq: 
+        _, cost, node, path = heappop(pq) 
+        if node == goal: return path + [node] 
+        if node not in visited: 
+            visited.add(node) 
+            for neighbor, weight in graph[node]: 
+                heappush(pq, (cost + weight + 
+heuristic[neighbor], cost + weight, neighbor, path + 
+[node])) 
+    return None 
+ 
+start = 'A' 
+print(f"Path found {a_star(start)}")</p>
+    <p>N QUEENS PROBLEM: 
+ 
+def solve_n_queens(n, board=[], solutions=[]): 
+    if len(board) == n:  
+        solutions.append(board) 
+        return 
+    for col in range(n): 
+        valid = True 
+        for r, c in enumerate(board): 
+            if col == c or abs(len(board) - r) == abs(col - c): 
+                valid = False 
+                break 
+        if valid: 
+            solve_n_queens(n, board + [col], solutions) 
+    return solutions 
+ 
+n = int(input("Enter N: ")) 
+for sol in solve_n_queens(n): 
+    for row in sol: 
+        for i in range(n): 
+            print("1" if i == row else "0", end=" ") 
+        print() 
+    print() </p>
+    <p>.VACCUM CLEANER WORLD PROBLEM: 
+ 
+class VacuumCleanerAgent: 
+    def __init__(self): 
+        self.environment = { 
+            'A': 'Clean', 
+            'B': 'Dirty'   
+        } 
+        self.current_location = 'A' 
+ 
+    def sense(self): 
+        return self.environment[self.current_location] 
+ 
+    def act(self): 
+        if self.sense() == 'Dirty': 
+            print(f"Location {self.current_location} is Dirty. 
+Cleaning...") 
+            self.environment[self.current_location] = 
+'Clean' 
+            print(f"Location {self.current_location} is now 
+Clean.") 
+        else: 
+            print(f"Location {self.current_location} is 
+already Clean. Moving...") 
+            self.move() 
+ 
+    def move(self): 
+        self.current_location = 'B' if self.current_location 
+== 'A' else 'A' 
+        print(f"Moved to location 
+{self.current_location}.") 
+ 
+    def run(self, steps=5): 
+        for step in range(steps): 
+            print(f"\nStep {step + 1}:") 
+            self.act() 
+ 
+ 
+if __name__ == "__main__": 
+    agent = VacuumCleanerAgent() 
+    agent.run(steps=5) </p>
+    <p></p>
 
     <!-- Option 2: Using JavaScript to show an alert -->
     <script>
